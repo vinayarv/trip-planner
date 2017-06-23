@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
-const db = require('./db');
+const db = require('./models');
 const volleyball = require('volleyball');
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
+
 
 app.use(volleyball);
 
