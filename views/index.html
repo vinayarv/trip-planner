@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Trip Planner</title>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-</head>
-<body>
+{% extends 'layout.html' %}
+
+{% block title %}Your Trip{% endblock %}
+
+{% block content %}
   <h1>Welcome!</h1>
   <div>
     Hotels: <select name= "Hotels">
@@ -29,6 +27,4 @@
       {% endfor %}
     </select>
   </div>
-
-</body>
-</html>
+{% endblock %}
