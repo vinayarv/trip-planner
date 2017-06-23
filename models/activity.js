@@ -1,7 +1,9 @@
 
-var db = require('db');
+var db = require('./db');
+const Sequelize = db.Sequelize;
 
-const activities = db.define('activities', {
+
+const Activities = db.define('activities', {
   name:{
     type: Sequelize.STRING
   },
@@ -10,3 +12,4 @@ const activities = db.define('activities', {
   }
 })
 
+module.exports = Activities;

@@ -1,14 +1,9 @@
 
-var db = require('db');
-/*
-address
-city
-state
-phone (string)
-location (lat, lon float array)
-*/
+var db = require('./db');
+const Sequelize = db.Sequelize;
 
-const place = db.define('place', {
+
+const Place = db.define('place', {
   address: {
     type: Sequelize.STRING
   },
@@ -22,6 +17,11 @@ const place = db.define('place', {
     type: Sequelize.STRING
   },
   location: {
-    type: Sequelize.ARRAY(Sequelize.FLOAT)
+    type: Sequelize.ARRAY(Sequelize.FLOAT),
+    validate: {
+      len: [2]
+    }
   }
 });
+
+module.exports = Place;
