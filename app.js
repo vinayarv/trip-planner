@@ -17,22 +17,26 @@ app.use(volleyball);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(__dirname + '/public'));
+
+app.use( express.static(__dirname + '/public'));
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/'));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist'));
 
 app.set('view engine', 'html');
 app.engine('html', nunjucks.render);
 nunjucks.configure('views', { noCache: true });
 
+/*
+`GET:
+    Accessing hotels, Restaurants and Activities from database
+    Rendering the above table contents.
+*/
 app.get('/', function(req, res, next) {
-  /*
-    Promise: hotels, Restaurants, Activities
-  */
   var hotelPromise = Hotels.findAll();
   var restaurantsPromise = Restaurants.findAll();
   var activitiesPromise = Activities.findAll();
   Promise.all([hotelPromise, restaurantsPromise, activitiesPromise])
   .then(function(dbContent){
-      console.log(dbContent);
       var hotels = dbContent[0];
       var restaurants = dbContent[1];
       var activities = dbContent[2];
