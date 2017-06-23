@@ -6,5 +6,29 @@
 </head>
 <body>
   <h1>Welcome!</h1>
+  <div>
+    Hotels: <select name= "Hotels">
+      {% for hotel in templateHotels %}
+        <option value="{{hotel.name}}">{{hotel.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div>
+    Restaurants: <select name= "Restaurants">
+      {% for restaurant in templateRestaurants %}
+        <option value="{{restaurant.name}}">{{restaurant.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+    <div>
+    Activities: <select name= "Activities">
+      {% for activity in templateActivities %}
+        <option value="{{activity.name}}">{{activity.name}}</option>
+      {% endfor %}
+    </select>
+  </div>
+
 </body>
 </html>

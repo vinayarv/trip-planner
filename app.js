@@ -1,16 +1,17 @@
 const express = require('express');
 const app = express();
-const db = require('./models');
+const models = require('./models');
 const volleyball = require('volleyball');
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
 const Promise = require('bluebird');
+const db = models.db;
 
 //Exporting each model
-const Hotels = db.Hotels;
-const Restaurants = db.Restaurants;
-const Activities = db.Activities;
-const Place = db.Place;
+const Hotels = models.Hotels;
+const Restaurants = models.Restaurants;
+const Activities = models.Activities;
+const Place = models.Place;
 
 app.use(volleyball);
 
@@ -29,8 +30,17 @@ app.get('/', function(req, res, next) {
   var hotelPromise = Hotels.findAll();
   var restaurantsPromise = Restaurants.findAll();
   var activitiesPromise = Activities.findAll();
-  Promise.all([hotelPromise, restaurantsPromise, activitiesPromise]).then(function(dbContent){
-      res.render('index', {templateHotels: dbContent[0], templateRestaurants: dbContent[1], templateActivities: dbContent[2]});
+  Promise.all([hotelPromise, restaurantsPromise, activitiesPromise])
+  .then(function(dbContent){
+      console.log(dbContent);
+      var hotels = dbContent[0];
+      var restaurants = dbContent[1];
+      var activities = dbContent[2];
+      res.render('index', {
+        templateHotels: hotels,
+        templateRestaurants: restaurants,
+        templateActivities: activities
+      });
   })
 });
 
